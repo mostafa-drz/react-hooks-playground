@@ -17,21 +17,34 @@ class Repositories extends React.Component {
     );
     this.setState({ repos: resp });
   };
+  Row = ({ index, style }) => (
+    <div style={style}>
+      <Repo {...this.state.repos[index]} />
+    </div>
+  );
+
   render() {
-    const { repos } = this.state;
     return (
       <Container>
         <h1>Repositories</h1>
-        {repos.map(rep => (
+        {/* {repos.map(rep => (
           <Repo key={rep.id} {...rep} />
-        ))}
+        ))} */}
+        <FixedSizeList
+          itemCount={this.state.repos.length}
+          height={1000}
+          itemSize={150}
+          width="100%"
+        >
+          {this.Row}
+        </FixedSizeList>
       </Container>
     );
   }
 }
 
 function Repo({
-  owner: { url: ownerURL, avatar_url: ownerAvatar, login: ownerName },
+  owner: { html_url: ownerURL, avatar_url: ownerAvatar, login: ownerName },
   html_url,
   description,
   name
