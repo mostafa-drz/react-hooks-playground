@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import { FixedSizeList } from "react-window";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import Repo from "./Repo";
 
 function Repositories(props) {
-  const [repos, setRepos] = useState([]);
-  useEffect(() => {
-    setRepos(props.repos);
-  }, [props.repos]);
+  const { repos } = props;
   switch (props.status) {
     case "RESOLVED":
       return (
