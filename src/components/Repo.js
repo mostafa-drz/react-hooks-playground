@@ -28,10 +28,14 @@ function Repo({
             height: "100%"
           }}
         >
-          <a href={html_url} target="_blank" rel="noopener noreferrer">
-            <h2 style={{ fontSize: "1.5rem" }}>{name}</h2>
-          </a>
-          <p style={{ fontSize: "1rem" }}>{description}</p>
+          <div>
+            <a href={html_url} target="_blank" rel="noopener noreferrer">
+              <h2 style={{ fontSize: "1.5rem" }}>{name}</h2>
+            </a>
+            <p style={{ fontSize: "1rem" }}>
+              {cropText({ text: description, length: 150 })}
+            </p>
+          </div>
           <div style={{ display: "flex" }}>
             <div style={{ minWidth: "50px" }}>
               <span>{stars}</span>
@@ -77,4 +81,11 @@ function Repo({
   );
 }
 
+function cropText({ text, placeholder = "...", length = 200 }) {
+  return text
+    ? text.length < length
+      ? text
+      : text.substring(0, length - 3) + "..."
+    : text;
+}
 export default Repo;
